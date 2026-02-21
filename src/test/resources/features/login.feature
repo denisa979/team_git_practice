@@ -1,8 +1,7 @@
-Feature: Smoke
+Feature: Login functionality
 
-  Scenario: user is able to login with valid credentials as a librarian
+  Scenario: Librarian logs in successfully
     Given user is on the login page
-    When user enters "librarian11@library" and "libraryUser"
-    And clicks on the Login button
-    Then user can see the following url "https://library2.cydeo.com/#dashboard"
-    And user can see the user account name contains "Test Librarian"
+    When user logs in as a librarian
+    Then user should be on the dashboard page
+    And user account name should be displayed

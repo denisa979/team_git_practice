@@ -1,30 +1,31 @@
 package com.team.git.practice.utilities;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class UI_Helper {
 
 
 
-	static String email, password;
+	public static Map<String, String> fetchCredentials() {
 
-	private static List<String> credential = new ArrayList<>();
+		Map<String, String> credentials = new HashMap<>();
 
+		String email = System.getenv("EMAIL");
+		String password = System.getenv("PASSWORD");
 
+		if (email == null) {
+			email = ConfigurationReader.properties.getProperty("email");
+		}
 
+		if (password == null) {
+			password = ConfigurationReader.properties.getProperty("password");
+		}
 
-	public static List<String> fetchCredentials(){
+		credentials.put("email", email);
+		credentials.put("password", password);
 
-		email = System.getenv("EMAIL");
-		password = System.getenv("PASSWORD");
-
-		email = (email == null)  ? email= ConfigurationReader.properties.getProperty("email"): email;
-		password = (password == null)  ? password= ConfigurationReader.properties.getProperty(password): password;
-
-		credential.add(email);
-		credential.add(password);
-
-		return credential;
+		return credentials;
 	}
 }
+
