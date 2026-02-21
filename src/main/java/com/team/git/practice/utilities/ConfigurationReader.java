@@ -1,18 +1,22 @@
 package com.team.git.practice.utilities;
 
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.util.Properties;
 
 public class ConfigurationReader {
 
-    static final Properties properties = new Properties();
+    public static final Properties properties = new Properties();
 
     static {
-        try (FileInputStream input = new FileInputStream("src/main/resources/configuration.properties")) {
-            properties.load(input);
-        } catch (IOException e) {
-            throw new RuntimeException("configuration.properties file not found or could not be loaded.", e);
+        try {
+            properties.load(
+                    ConfigurationReader.class
+                            .getClassLoader()
+                            .getResourceAsStream("configuration.properties")
+            );
+        } catch (Exception e) {
+            throw new RuntimeException(
+                    "configuration.properties file not found or could not be loaded.", e
+            );
         }
     }
 
